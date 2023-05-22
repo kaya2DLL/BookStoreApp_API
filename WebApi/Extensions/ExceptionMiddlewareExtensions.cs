@@ -17,7 +17,7 @@ namespace WebApi.Extensions
                 appError.Run(async context =>
                 {
                     
-                    context.Response.ContentType = "application/json";
+                    context.Response.ContentType = "application/json"; 
 
                     var contectFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (context is not null)
