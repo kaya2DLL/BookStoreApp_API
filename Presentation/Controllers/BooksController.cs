@@ -39,7 +39,7 @@ namespace Presentation.Controllers
        // [ResponseCache(Duration =60)]
         public async Task<IActionResult> GetAllBooksAsync([FromQuery] BookParameters bookParameters)
         {
-            var linkParameters = new LinkParameters() 
+            var linkParameters = new LinkParameters()
             {
                 BookParameters = bookParameters,
                 HttpContext = HttpContext
