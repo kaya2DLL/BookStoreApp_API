@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [ApiVersion("2.0")]
+    
     [ApiController]
-    [Route("api/book/v{version:apiVersion}")]
-    public class BookV2Controller : ControllerBase
+    [Route("api/book")]
+    public class BooksV2Controller : ControllerBase
     {
         private readonly IServiceManager _manager;
-         
-        public BookV2Controller(IServiceManager manager)
+
+        public BooksV2Controller(IServiceManager manager)
         {
             _manager = manager;
         }
@@ -28,3 +28,4 @@ namespace Presentation.Controllers
         }
     }
 }
+

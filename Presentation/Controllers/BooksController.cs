@@ -14,12 +14,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities.LinkModels;
 using Presentation.ActionFilters;
+using Marvin.Cache.Headers;
 
 namespace Presentation.Controllers
 {
-    [ApiVersion("1.0")]
+    [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
     [Route("api/books")]
+    //[ResponseCache(CacheProfileName = "5mins")]
+    //[HttpCacheExpiration(CacheLocation =CacheLocation.Public, MaxAge =80)]
     public class BooksController : ControllerBase
     {
 
@@ -33,6 +36,7 @@ namespace Presentation.Controllers
         [HttpHead]
         [HttpGet(Name = "GetAllBooksAsync")]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
+       // [ResponseCache(Duration =60)]
         public async Task<IActionResult> GetAllBooksAsync([FromQuery] BookParameters bookParameters)
         {
             var linkParameters = new LinkParameters()
@@ -70,7 +74,7 @@ namespace Presentation.Controllers
         {
             var book = await _manager.BookService.CreateOneBookAsync(bookDto);
 
-            return StatusCode(201, book);//CreatedAtRoute()
+            return StatusCode(201, book);  //CreatedAtRoute()
 
         }
 

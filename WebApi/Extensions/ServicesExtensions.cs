@@ -1,10 +1,13 @@
-﻿using Entities.DataTransferObject;
+﻿using AspNetCoreRateLimit;
+using Entities.DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Presentation.ActionFilter;
 using Presentation.ActionFilters;
+using Presentation.Controllers;
 using Repositories.Contracts;
 using Repositories.EFCore;
 using Services;
@@ -22,8 +25,9 @@ namespace WebApi.Extensions
                 ("sqlConnection")));
         }
 
-            public static void ConfigureRepositoryManager(this IServiceCollection services) { 
-                services.AddScoped<IRepositoryManager,RepositoryManager>();
+        public static void ConfigureRepositoryManager(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
 
         public static void ConfigureServiceManager(this IServiceCollection services)
@@ -33,7 +37,7 @@ namespace WebApi.Extensions
 
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
-            services.AddSingleton<ILoggerService,LoggerManager>();
+            services.AddSingleton<ILoggerService, LoggerManager>();
         }
 
         public static void ConfigureActionfilters(this IServiceCollection services)
@@ -91,16 +95,61 @@ namespace WebApi.Extensions
                 }
             });
         }
-           
-        
+
+
         public static void ConfigureVersioning(this IServiceCollection services)
         {
             services.AddApiVersioning(opt =>
             {
-                opt.ReportApiVersions = false;
-                //opt.AssumeDefaultVersionWhenUnspecified = true;
+                opt.ReportApiVersions = true;
+                opt.AssumeDefaultVersionWhenUnspecified = true;
                 opt.DefaultApiVersion = new ApiVersion(1, 0);
+                opt.ApiVersionReader = new HeaderApiVersionReader("api-version");
+                opt.Conventions.Controller<BooksController>()
+                .HasApiVersion(new ApiVersion(1, 0));// Describing API version
+
+                opt.Conventions.Controller<BooksV2Controller>()
+                .HasDeprecatedApiVersion(new ApiVersion(2, 0));
             });
         }
+       
+        public static void ConfigureResponseCaching(this IServiceCollection services) =>
+            services.AddResponseCaching();
+    
+        public static void ConfigurehttpCacheHeaders(this IServiceCollection services)=>
+            services.AddHttpCacheHeaders(expirationOPt =>
+            {
+                expirationOPt.MaxAge = 90;
+                expirationOPt.CacheLocation = Marvin.Cache.Headers.CacheLocation.Public;
+            },
+                validationOpt =>
+                {
+                    validationOpt.MustRevalidate = false;
+                });
+
+        public static void ConfigureRateLimit(this IServiceCollection services)
+        {
+            var rateLimitRules = new List<RateLimitRule>()
+            {
+                new RateLimitRule()
+                {
+                    Endpoint="*",
+                    Limit=3,
+                    Period="1m"
+                }
+            };
+
+            services.Configure<IpRateLimitOptions>(opt =>
+            {
+                opt.GeneralRules = rateLimitRules;
+            });
+
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+        }
     }
+
+
 }
