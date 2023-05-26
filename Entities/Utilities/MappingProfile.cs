@@ -11,9 +11,9 @@ namespace Entities.Utilities
 {
     public class MappingProfile : Profile
     {
-       public MappingProfile()
+        public MappingProfile()
         {
             CreateMap<BookDtoForUpdate, Book>();
         }
-        }
+    }
 }

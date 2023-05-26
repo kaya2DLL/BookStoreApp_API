@@ -40,22 +40,25 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.ConfigureSqlContext(builder.Configuration);//added sql connection from appsettings.json
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
-builder.Services.ConfigureLoggerService();
+builder.Services.ConfigureLoggerService();//bknz:ServiceExtension
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.ConfigureActionfilters();
+builder.Services.ConfigureActionfilters();//bknz:ServiceExtension
 builder.Services.ConfigureCors();
-builder.Services.ConfigureDataShaper();
+builder.Services.ConfigureDataShaper();//bknz:ServiceExtension
 builder.Services.AddCustomMediaTypes();
 builder.Services.AddScoped<IBookLinks, BookLinks>();
 builder.Services.ConfigureVersioning();
-builder.Services.ConfigureResponseCaching();
-builder.Services.ConfigurehttpCacheHeaders();
+builder.Services.ConfigureResponseCaching();//bknz:ServiceExtension
+builder.Services.ConfigurehttpCacheHeaders();//bknz:ServiceExtension
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureRateLimit();
+
+builder.Services.ConfigureJWT(builder.Configuration);// added JWT from appsetting.json
+builder.Services.ConfigureIdentity();//bknz:ServiceExtension
 
 
 
@@ -82,6 +85,8 @@ app.UseCors("CorsPolicy");
 app.UseResponseCaching();
 app.UseHttpCacheHeaders();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

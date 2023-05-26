@@ -1,21 +1,21 @@
 ﻿using AutoMapper;
-using Entities.DataTransferObject;
+using Entities.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Repositories.Contracts;
 using Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
     public class ServiceManager : IServiceManager
     {
         private readonly Lazy<IBookService> _bookService;
+        private readonly Lazy<IAuthenticationService> _authenticationService;
         public ServiceManager(IRepositoryManager repositoryManager,
             ILoggerService logger,
             IMapper mapper,
+            IConfiguration configuration,
+            UserManager<User> userManager,
             IBookLinks bookLinks)
         {
             _bookService = new Lazy<IBookService>(() => new BookManager(
@@ -24,7 +24,14 @@ namespace Services
                 mapper,
                 bookLinks
                 ));
-        }
+
+            _authenticationService = new Lazy<IAuthenticationService>(() =>
+            new AuthenticationManager(logger,mapper,userManager,configuration)
+            );
+        } 
+
+        public IAuthenticationService AuthenticationService => _authenticationService.Value;
+
         IBookService IServiceManager.BookService => _bookService.Value;
     }
 }

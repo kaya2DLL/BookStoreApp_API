@@ -1,5 +1,8 @@
 ﻿using AspNetCoreRateLimit;
 using Entities.DataTransferObject;
+using Entities.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -12,6 +15,8 @@ using Repositories.Contracts;
 using Repositories.EFCore;
 using Services;
 using Services.Contracts;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebApi.Extensions
 {
@@ -112,11 +117,11 @@ namespace WebApi.Extensions
                 .HasDeprecatedApiVersion(new ApiVersion(2, 0));
             });
         }
-       
+
         public static void ConfigureResponseCaching(this IServiceCollection services) =>
             services.AddResponseCaching();
-    
-        public static void ConfigurehttpCacheHeaders(this IServiceCollection services)=>
+
+        public static void ConfigurehttpCacheHeaders(this IServiceCollection services) =>
             services.AddHttpCacheHeaders(expirationOPt =>
             {
                 expirationOPt.MaxAge = 90;
@@ -134,7 +139,7 @@ namespace WebApi.Extensions
                 new RateLimitRule()
                 {
                     Endpoint="*",
-                    Limit=3,
+                    Limit=50,
                     Period="1m"
                 }
             };
@@ -144,10 +149,61 @@ namespace WebApi.Extensions
                 opt.GeneralRules = rateLimitRules;
             });
 
-            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();//
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
             services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            var builder = services.AddIdentity<User, IdentityRole>(opt =>
+            {
+                opt.Password.RequireDigit = true;
+                opt.Password.RequireLowercase = true;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredLength = 8;
+                opt.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<RepositoryContext>()
+                .AddDefaultTokenProviders(); 
+
+        }
+
+
+
+        /// <summary>
+        /// Json web token Configuration
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        public static void ConfigureJWT(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var jwtSettings = configuration.GetSection("JwtSettings");
+            var secretKey = jwtSettings["secretKey"];
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options=>
+                options.TokenValidationParameters= new TokenValidationParameters
+                {
+                    ValidateIssuer= true,
+                    ValidateAudience= true,
+                    ValidateLifetime= true,
+                    ValidateIssuerSigningKey= true,
+                    ValidIssuer = jwtSettings["validIssuer"],
+                    ValidAudience = jwtSettings["validAudience"],
+                    IssuerSigningKey= new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                }
+            );
         }
     }
 
