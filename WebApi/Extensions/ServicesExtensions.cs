@@ -22,6 +22,12 @@ namespace WebApi.Extensions
 {
     public static class ServicesExtensions
     {
+
+        /// <summary>
+        /// Connection to SQL with sql info in appsettings.json 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<RepositoryContext>
@@ -39,12 +45,20 @@ namespace WebApi.Extensions
         {
             services.AddScoped<IServiceManager, ServiceManager>();
         }
-
+        /// <summary>
+        /// Added response or error information with log
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerService, LoggerManager>();
         }
 
+
+        /// <summary>
+        /// Added Filters For API Response
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureActionfilters(this IServiceCollection services)
         {
             services.AddScoped<ValidationFilterAttribute>();// IoC
@@ -52,6 +66,10 @@ namespace WebApi.Extensions
             services.AddScoped<ValidateMediaTypeAttribute>(); // media type validation
         }
 
+        /// <summary>
+        /// Added response with CSV format 
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureCors(this IServiceCollection services)
         {
             services.AddCors(options =>
@@ -64,11 +82,18 @@ namespace WebApi.Extensions
             });
         }
 
+        /// <summary>
+        /// DataSharper
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureDataShaper(this IServiceCollection services)
         {
             services.AddScoped<IDataShaper<BookDto>, DataShaper<BookDto>>();
         }
-
+        /// <summary>
+        /// HATEoas Art.
+        /// </summary>
+        /// <param name="services"></param>
         public static void AddCustomMediaTypes(this IServiceCollection services)
         {
             services.Configure<MvcOptions>(config =>
@@ -101,7 +126,10 @@ namespace WebApi.Extensions
             });
         }
 
-
+        /// <summary>
+        /// Added API versioning
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureVersioning(this IServiceCollection services)
         {
             services.AddApiVersioning(opt =>
@@ -117,10 +145,16 @@ namespace WebApi.Extensions
                 .HasDeprecatedApiVersion(new ApiVersion(2, 0));
             });
         }
-
+        /// <summary>
+        /// Caching of response information
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureResponseCaching(this IServiceCollection services) =>
             services.AddResponseCaching();
-
+        /// <summary>
+        /// Caching of headers information
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigurehttpCacheHeaders(this IServiceCollection services) =>
             services.AddHttpCacheHeaders(expirationOPt =>
             {
@@ -131,7 +165,10 @@ namespace WebApi.Extensions
                 {
                     validationOpt.MustRevalidate = false;
                 });
-
+        /// <summary>
+        /// Rate Limit for Response
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureRateLimit(this IServiceCollection services)
         {
             var rateLimitRules = new List<RateLimitRule>()

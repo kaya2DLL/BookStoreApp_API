@@ -1,9 +1,6 @@
 using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NLog;
-using Presentation.ActionFilter;
-using Repositories.EFCore;
 using Services;
 using Services.Contracts;
 using WebApi.Extensions;
@@ -36,29 +33,34 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 
 
-
+///(Extensions for application)
+//bknz:ServiceExtension / WebApi.Extensions;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.ConfigureSqlContext(builder.Configuration);//added sql connection from appsettings.json
+builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
-builder.Services.ConfigureLoggerService();//bknz:ServiceExtension
+builder.Services.ConfigureLoggerService();
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.ConfigureActionfilters();//bknz:ServiceExtension
+builder.Services.ConfigureActionfilters();
 builder.Services.ConfigureCors();
-builder.Services.ConfigureDataShaper();//bknz:ServiceExtension
+builder.Services.ConfigureDataShaper();
 builder.Services.AddCustomMediaTypes();
+
 builder.Services.AddScoped<IBookLinks, BookLinks>();
+
 builder.Services.ConfigureVersioning();
-builder.Services.ConfigureResponseCaching();//bknz:ServiceExtension
-builder.Services.ConfigurehttpCacheHeaders();//bknz:ServiceExtension
+
+builder.Services.ConfigureResponseCaching();
+builder.Services.ConfigurehttpCacheHeaders();
 builder.Services.AddMemoryCache();
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureRateLimit();
 
-builder.Services.ConfigureJWT(builder.Configuration);// added JWT from appsetting.json
-builder.Services.ConfigureIdentity();//bknz:ServiceExtension
+builder.Services.ConfigureJWT(builder.Configuration);
+builder.Services.ConfigureIdentity();
 
 
 
@@ -82,9 +84,9 @@ app.UseHttpsRedirection();
 
 app.UseIpRateLimiting();
 app.UseCors("CorsPolicy");
+
 app.UseResponseCaching();
 app.UseHttpCacheHeaders();
-
 
 app.UseAuthentication();
 app.UseAuthorization();

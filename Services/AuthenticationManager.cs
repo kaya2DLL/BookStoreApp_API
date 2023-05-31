@@ -81,7 +81,7 @@ namespace Services
         private async Task<List<Claim>> GetClaims()
         {
             var claims = new List<Claim>()
-            {
+            {   
                 new Claim(ClaimTypes.Name,_currentUser.UserName)
             }; //added username to claims
 
@@ -103,7 +103,7 @@ namespace Services
                 issuer: jwtSettings["validIssuer"],
                 audience: jwtSettings["validAudience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+                expires: DateTime.Now.AddHours(Convert.ToDouble(jwtSettings["expires"])),
                 signingCredentials: signinCredentials
                 );
             return tokenOptions;
