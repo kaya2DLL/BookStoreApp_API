@@ -541,3 +541,110 @@
 2023-05-31 13:02:51.0675 Info Message Template Auto Format enabled
 2023-05-31 13:02:51.1727 Info Registered target NLog.Targets.FileTarget(Name=logfile)
 2023-05-31 13:02:51.1968 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-05-31 13:11:57.3473 Info Message Template Auto Format enabled
+2023-05-31 13:11:57.4272 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-05-31 13:11:57.4479 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-05-31 13:12:24.5850 Info Message Template Auto Format enabled
+2023-05-31 13:12:24.6739 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-05-31 13:12:24.6947 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-05-31 13:19:43.1330 Info Message Template Auto Format enabled
+2023-05-31 13:19:43.2230 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-05-31 13:19:43.2442 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-05-31 14:06:42.4006 Info Message Template Auto Format enabled
+2023-05-31 14:06:42.5171 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-05-31 14:06:42.5365 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-05-31 14:14:43.6229 Info Message Template Auto Format enabled
+2023-05-31 14:14:43.7293 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-05-31 14:14:43.7522 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-02 10:46:05.4433 Info Message Template Auto Format enabled
+2023-06-02 10:46:05.6976 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-02 10:46:05.7320 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-02 10:49:57.2783 Info Message Template Auto Format enabled
+2023-06-02 10:49:57.4794 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-02 10:49:57.5326 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-02 10:51:06.7681 Info Message Template Auto Format enabled
+2023-06-02 10:51:07.1304 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-02 10:51:07.1659 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-02 10:54:27.3683 Info Message Template Auto Format enabled
+2023-06-02 10:54:27.5839 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-02 10:54:27.6211 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-02 10:55:26.0328 Info Message Template Auto Format enabled
+2023-06-02 10:55:26.2620 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-02 10:55:26.3112 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-02 10:56:33.3773 Info Message Template Auto Format enabled
+2023-06-02 10:56:33.6396 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-02 10:56:33.6831 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-02 11:03:19.1292 Info AppDomain Shutting down. LogFactory closing...
+2023-06-02 11:03:19.2065 Info LogFactory has been closed.
+2023-06-02 11:10:08.0862 Info Message Template Auto Format enabled
+2023-06-02 11:10:08.3622 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-02 11:10:08.4034 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:08:31.2609 Info Message Template Auto Format enabled
+2023-06-05 15:08:31.3629 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:08:31.3835 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:10:56.7448 Info Message Template Auto Format enabled
+2023-06-05 15:10:56.8421 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:10:56.8674 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:11:44.4938 Info Message Template Auto Format enabled
+2023-06-05 15:11:44.5742 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:11:44.5933 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:12:42.6274 Info Message Template Auto Format enabled
+2023-06-05 15:12:42.7122 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:12:42.7361 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:21:51.3442 Info Message Template Auto Format enabled
+2023-06-05 15:21:51.4283 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:21:51.4487 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:23:08.3349 Info Message Template Auto Format enabled
+2023-06-05 15:23:08.4081 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:23:08.4272 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:23:35.5618 Info Message Template Auto Format enabled
+2023-06-05 15:23:35.6397 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:23:35.6595 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:25:13.1100 Info Message Template Auto Format enabled
+2023-06-05 15:25:13.1920 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:25:13.2113 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:27:41.0927 Info Message Template Auto Format enabled
+2023-06-05 15:27:41.1666 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:27:41.1866 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:43:48.7082 Info Message Template Auto Format enabled
+2023-06-05 15:43:48.7487 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:43:48.7631 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:43:49.6063 Info AppDomain Shutting down. LogFactory closing...
+2023-06-05 15:43:49.6132 Info LogFactory has been closed.
+2023-06-05 15:44:14.4576 Info Message Template Auto Format enabled
+2023-06-05 15:44:14.5024 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 15:44:14.5024 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 15:44:15.5491 Info AppDomain Shutting down. LogFactory closing...
+2023-06-05 15:44:15.5491 Info LogFactory has been closed.
+2023-06-05 17:31:00.8014 Info Message Template Auto Format enabled
+2023-06-05 17:31:00.8807 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 17:31:00.9005 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 17:58:02.3734 Info Message Template Auto Format enabled
+2023-06-05 17:58:02.4944 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-05 17:58:02.5210 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-05 18:07:19.7055 Info AppDomain Shutting down. LogFactory closing...
+2023-06-05 18:07:19.7326 Info LogFactory has been closed.
+2023-06-06 16:25:20.9790 Info Message Template Auto Format enabled
+2023-06-06 16:25:21.0815 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-06 16:25:21.1032 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-06 16:25:56.0652 Info Message Template Auto Format enabled
+2023-06-06 16:25:56.1661 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-06 16:25:56.1925 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-06 16:28:13.3030 Info Message Template Auto Format enabled
+2023-06-06 16:28:13.3831 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-06 16:28:13.4041 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-06 16:28:52.1501 Info Message Template Auto Format enabled
+2023-06-06 16:28:52.2316 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-06 16:28:52.2514 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-06 16:30:09.7234 Info Message Template Auto Format enabled
+2023-06-06 16:30:09.8031 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-06 16:30:09.8256 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-06 16:34:14.7553 Info Message Template Auto Format enabled
+2023-06-06 16:34:14.8372 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-06 16:34:14.8577 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-06 16:40:19.9633 Info Message Template Auto Format enabled
+2023-06-06 16:40:20.0418 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-06 16:40:20.0615 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config
+2023-06-06 16:41:23.0700 Info Message Template Auto Format enabled
+2023-06-06 16:41:23.1587 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-06 16:41:23.1825 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\muham\Desktop\BookAPI-API-validationUpdate\WebApi\nlog.config

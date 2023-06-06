@@ -11,6 +11,7 @@ namespace Presentation.Controllers
     
     [ApiController]
     [Route("api/book")]
+    [ApiExplorerSettings(GroupName ="v2")]
     public class BooksV2Controller : ControllerBase
     {
         private readonly IServiceManager _manager;

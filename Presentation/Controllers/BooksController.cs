@@ -6,15 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Presentation.ActionFilter;
 using Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities.LinkModels;
 using Presentation.ActionFilters;
-using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Presentation.Controllers
@@ -22,6 +14,7 @@ namespace Presentation.Controllers
     [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
     [Route("api/books")]
+    [ApiExplorerSettings(GroupName = "v1")]
     //[ResponseCache(CacheProfileName = "5mins")]
     //[HttpCacheExpiration(CacheLocation =CacheLocation.Public, MaxAge =80)]
     public class BooksController : ControllerBase
@@ -35,12 +28,12 @@ namespace Presentation.Controllers
         }
 
 
-        
+        [Authorize]
         [HttpHead]
         [HttpGet(Name = "GetAllBooksAsync")]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         // [ResponseCache(Duration =60)]
-        [Authorize]
+        
         public async Task<IActionResult> GetAllBooksAsync([FromQuery] BookParameters bookParameters)
         {
             var linkParameters = new LinkParameters()
@@ -60,8 +53,10 @@ namespace Presentation.Controllers
                 Ok(result.linkResponse.LinkedEntities) :
                 Ok(result.linkResponse.ShapedEntities);
         }
-        
+
+        //[Authorize(Roles = "User, Admin, Editor")]
         [HttpGet("{id:int}")]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetOneBookAsync([FromRoute(Name = "id")] int id)
         {
             var book = await _manager
@@ -72,8 +67,9 @@ namespace Presentation.Controllers
             return Ok(book);
         }
 
-        
+        //[Authorize(Roles = "Admin, Editor")]
         [HttpPost(Name ="CreateOneBookAsync")]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
         {
             var book = await _manager.BookService.CreateOneBookAsync(bookDto);
@@ -82,8 +78,9 @@ namespace Presentation.Controllers
 
         }
 
-        
+        //[Authorize(Roles = "Admin, Editor")]
         [HttpPut("{id:int}")]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> UpdateOneBookAsync([FromRoute(Name = "id")] int id, BookDtoForUpdate bookDto)
         {
             await _manager.BookService.UpdteOneBookAsync(id, bookDto, false);
@@ -91,15 +88,18 @@ namespace Presentation.Controllers
             return NoContent();//204
         }
 
-
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> DeleteOneBookAsync([FromRoute(Name = "id")] int id)
         {
             await _manager.BookService.DeleteOneBookAsync(id, false);
             return NoContent();
         }
 
+        //[Authorize(Roles = "Admin, Editor")]
         [HttpPatch("{id:int}")]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> PartallyUpdateOneBookAsync([FromRoute(Name = "id")] int id,
             [FromBody] JsonPatchDocument<BookDtoForUpdate> bookPatch)
         {
@@ -120,7 +120,9 @@ namespace Presentation.Controllers
             return NoContent();//204
         }
 
+        
         [HttpOptions]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public IActionResult GetBookOptions()
         {
             Response.Headers.Add("Allow", "GET, PUT, POST, PATCH, DELETE, HEAD, OPTIONS");

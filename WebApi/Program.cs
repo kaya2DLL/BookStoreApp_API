@@ -37,6 +37,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 //bknz:ServiceExtension / WebApi.Extensions;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigureSwagger();
 
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
@@ -59,6 +60,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureRateLimit();
 
+
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.ConfigureIdentity();
 
@@ -70,7 +72,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(s =>
+    {
+        s.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store v1");
+        s.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store v2");
+    });
 }
 var logger = app.Services.GetRequiredService<ILoggerService>();
 app.ConfigureExceptionHandler(logger);
