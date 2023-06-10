@@ -81,7 +81,7 @@ namespace Presentation.Controllers
         [HttpPost(Name ="CreateOneBookAsync")]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
-        {
+        { 
             var book = await _manager.BookService.CreateOneBookAsync(bookDto);
 
             return StatusCode(201, book);  //CreatedAtRoute()
