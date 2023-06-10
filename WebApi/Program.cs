@@ -14,14 +14,16 @@ builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true;
-    config.CacheProfiles.Add("5mins",new CacheProfile() { Duration=300});
+    config.CacheProfiles.Add("5mins", new CacheProfile() { Duration = 300 });
 })
-   
-    
+
+
     .AddXmlDataContractSerializerFormatters()
     .AddCustomCsvFormatter()
-    .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
-   // .AddNewtonsoftJson();
+    .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
+    .AddNewtonsoftJson(opt =>
+    opt.SerializerSettings
+    .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 
 
@@ -64,6 +66,9 @@ builder.Services.ConfigureRateLimit();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.ConfigureIdentity();
 
+builder.Services.RegisterRepositories();
+builder.Services.RegisterServices();
+
 
 
 var app = builder.Build();
@@ -75,7 +80,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(s =>
     {
         s.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store v1");
-        s.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store v2");
+        s.SwaggerEndpoint("/swagger/v2/swagger.json", "Book Store v2");
     });
 }
 var logger = app.Services.GetRequiredService<ILoggerService>();

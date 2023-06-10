@@ -24,7 +24,6 @@ namespace Services
         private readonly IMapper _mapper;
         private readonly UserManager<User> _user;
         private readonly IConfiguration _configuration;
-
         private User? _currentUser;
 
         public AuthenticationManager(ILoggerService logger,
@@ -48,11 +47,11 @@ namespace Services
             _currentUser.RefreshToken = refreshToken;
             if (populatedExp)
             {
-                _currentUser.RefreshTokenExpiryTime= DateTime.Now.AddDays(7);
+                _currentUser.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
             }
             await _user.UpdateAsync(_currentUser);
 
-            var accessToken= new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            var accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             return new TokenDto()
             {
                 AccessToken = accessToken,
@@ -68,7 +67,7 @@ namespace Services
 
             var result = await _user.CreateAsync(user, userForRegistrationDto.Password);
 
-            
+
             if (result.Succeeded)
                 await _user.AddToRolesAsync(user, userForRegistrationDto.Roles);
             return result;
@@ -99,7 +98,7 @@ namespace Services
         private async Task<List<Claim>> GetClaims()
         {
             var claims = new List<Claim>()
-            {   
+            {
                 new Claim(ClaimTypes.Name,_currentUser.UserName)
             }; //added username to claims
 
@@ -126,11 +125,11 @@ namespace Services
                 );
             return tokenOptions;
         }
-   
+
         private string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
-                using (var rng = RandomNumberGenerator.Create())
+            using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(randomNumber);
                 return Convert.ToBase64String(randomNumber);
@@ -142,7 +141,7 @@ namespace Services
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
             var secretKey = jwtSettings["secretKey"];
-          
+
             var tokenValidationParam = new TokenValidationParameters
             {
                 ValidateIssuer = true,
@@ -158,10 +157,10 @@ namespace Services
             var tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken securityToken;
 
-            var principal = tokenHandler.ValidateToken(token,tokenValidationParam, out securityToken);
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParam, out securityToken);
 
             var jwtSecurityToken = securityToken as JwtSecurityToken;
-            if(jwtSecurityToken is null ||
+            if (jwtSecurityToken is null ||
                 !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
                 StringComparison.InvariantCultureIgnoreCase))
             {
@@ -176,7 +175,7 @@ namespace Services
             var principal = GetPrincipalFromExpiredToken(tokenDto.AccessToken);
             var user = await _user.FindByNameAsync(principal.Identity.Name);
 
-            if(user == null ||
+            if (user == null ||
                 user.RefreshToken != tokenDto.RefreshToken ||
                 user.RefreshTokenExpiryTime <= DateTime.Now)
                 throw new RefreshTokenBadRequestException();

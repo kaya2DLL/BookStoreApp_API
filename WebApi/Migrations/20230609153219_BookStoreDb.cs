@@ -34,6 +34,8 @@ namespace WebApi.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -55,17 +57,16 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books",
+                name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,24 +175,55 @@ namespace WebApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "008f1f23-7fa5-44b6-92a3-2b6b72df9119", "16ce216e-5a75-42bd-aca6-99bd161e2fab", "User", "USER" },
-                    { "1c5c8300-45ea-43d1-96bc-a4441ab107b4", "566ddab0-57ef-4c69-8aa1-50ffd350f5f8", "Editor", "EDITOR" },
-                    { "fbabba78-c31b-4ab2-ba0d-f2b65af3d951", "f826d067-12cf-43f6-9f11-de1aada5b798", "Admin", "ADMIN" }
+                    { "3fe0f22b-7fd3-48a6-9bdb-dddd3d177764", "832af191-6561-4673-8c9f-da074fef816e", "User", "USER" },
+                    { "7781fc19-63ef-4662-849d-62ef0688dff7", "662c85f2-f69e-47c9-947a-7923b43ab78a", "Admin", "ADMIN" },
+                    { "b1dc4e41-5e45-4573-8f43-9c06f5fe706a", "27f64efa-7ece-444c-b45d-3149724f5784", "Editor", "EDITOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[,]
+                {
+                    { 2, "Computer Science" },
+                    { 3, "Netwoek" },
+                    { 4, "Tale" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "Id", "Price", "Title" },
+                columns: new[] { "Id", "CategoryId", "Price", "Title" },
                 values: new object[,]
                 {
-                    { 1, 73m, "Karagöz Hacivat" },
-                    { 2, 75m, "Mesnevi" },
-                    { 3, 71m, "Devlet" }
+                    { 1, 3, 73m, "Karagöz Hacivat" },
+                    { 2, 2, 75m, "Mesnevi" },
+                    { 3, 3, 71m, "Devlet" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -232,6 +264,11 @@ namespace WebApi.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_CategoryId",
+                table: "Books",
+                column: "CategoryId");
         }
 
         /// <inheritdoc />
@@ -260,6 +297,9 @@ namespace WebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

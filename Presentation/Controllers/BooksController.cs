@@ -28,7 +28,7 @@ namespace Presentation.Controllers
         }
 
 
-        [Authorize]
+        //[Authorize]
         [HttpHead]
         [HttpGet(Name = "GetAllBooksAsync")]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
@@ -65,6 +65,16 @@ namespace Presentation.Controllers
 
 
             return Ok(book);
+        }
+
+        //[Authorize(Roles = "User, Admin, Editor")]
+        [HttpGet("details")]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
+        public async Task<IActionResult> GetAllBooksWithDetailAsync()
+        {
+            return Ok(await _manager.
+                BookService
+                .GetAllBooksWithDetails(false));
         }
 
         //[Authorize(Roles = "Admin, Editor")]
